@@ -94,7 +94,7 @@ function returnArgumentsArray() {
  */
 
 function bindFunction(fn) {
-    return arguments[0].bind(context, [...arguments].slice([1, ]))
+    return fn.bind(...arguments)
 }
 
 export {
