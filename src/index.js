@@ -96,7 +96,6 @@ function returnArgumentsArray() {
 function bindFunction(fn) {
     return fn.bind(...arguments)
 }
-
 export {
     returnFirstArgument,
     sumWithDefaults,
