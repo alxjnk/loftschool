@@ -112,30 +112,20 @@ function returnBadArguments(fn) {
  */
 function calculator(number = 0) {
 
-    if ( isNaN(number)) {
+    if ( !(isFinite(number))) {
         throw new Error('number is not a number');
     }
     let obj = {};
 
-    obj.sum = (...args) => {
-        return args.reduce(function(sum, current) {
-            return sum + current;
-        }, number) 
-    };
-    obj.dif = (...args) => args.reduce(function(dif, current) {
-        return dif - current;
-    }, number);
-    obj.div = (...args) => {
-        return args.reduce(function(div, current) {
-            if (current === 0) {
-                throw new Error('division by 0');
-            }
+    obj.sum = (...args) => args.reduce((sum, current) => sum + current, number);
+    obj.dif = (...args) => args.reduce((dif, current) => dif - current, number);
+    obj.mul = (...args) => args.reduce((mul, current) => mul * current, number);    
+    obj.div = (...args) => args.reduce((div, current) => {
+        if (current === 0) {
+            throw new Error('division by 0');
+        }
 
-            return div / current;
-        }, number); 
-    };
-    obj.mul = (...args) => args.reduce(function(mul, current) {
-        return mul * current;
+        return div / current;
     }, number);
 
     return obj;
