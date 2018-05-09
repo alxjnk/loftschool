@@ -130,10 +130,12 @@ function deleteTextNodesRecursive(where) {
     }
 
     for (let i = 0; i < where.childNodes.length; i++) {
-        if (where.childNodes[i].nodeType === 1) {
-            deleteTextNodesRecursive(where.childNodes[i]);
-        } else if ( where.childNodes[i].nodeType ===3) {
-            where.childNodes[i].remove();
+        let nodes = where.childNodes;
+
+        if (nodes[i].nodeType === 1) {
+            deleteTextNodesRecursive(nodes[i]);
+        } else if (nodes[i].nodeType ===3) {
+            nodes[i].remove();
             i--;
         }
     }       
@@ -174,9 +176,11 @@ function collectDOMStat(root) {
             if (child.nodeType === 3) {
                 obj.texts++;
             } else {
-                obj.tags[child.nodeName] = (!obj.tags[child.nodeName]) ? 1: ++obj.tags[child.nodeName]; 
-                for (let clas of child.classList) {
-                    obj.classes[clas] = (obj.classes[clas]) ? ++obj.classes[clas]: 1;
+                let tag = child.tagName;
+
+                obj.tags[tag] = (!obj.tags[tag]) ? 1: ++obj.tags[tag]; 
+                for (let nodeClass of child.classList) {
+                    obj.classes[nodeClass] = (obj.classes[nodeClass]) ? ++obj.classes[nodeClass]: 1;
                 }
             }
             search(child);
@@ -225,8 +229,8 @@ function observeChildNodes(where, fn) {
         'childList': true,
         'subtree': true
     };
-
-    let getMutations = function(mutations) {
+    
+    let observer = new MutationObserver(mutations => {
         let obj = {
             type: '',
             nodes: []
@@ -244,9 +248,7 @@ function observeChildNodes(where, fn) {
         });
 
         fn(obj);
-    }
-    
-    let observer = new MutationObserver(getMutations);
+    });
 
     observer.observe(where, options);
 }
