@@ -67,12 +67,12 @@ function slice(array, from = 0, to = array.length) {
     let result = [];
 
     to = (to < 0) ? array.length + to: to;
+    to = (to > array.length) ? array.length: to;
     from = (from < 0) ? array.length + from: from;
+    from = (from < -array.length) ? 0: from;
 
     for (let i=from; i<to; i++) {
-        if (typeof array[i] != 'undefined') {
-            result.push(array[i]);
-        }
+        result.push(array[i]);
     }    
     
     return result;
