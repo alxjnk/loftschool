@@ -93,7 +93,7 @@ function addListeners(target) {
         };
     });
 }
-
+ 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
 
 addDivButton.addEventListener('click', function() {
