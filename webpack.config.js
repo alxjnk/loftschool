@@ -15,11 +15,10 @@ rules.push({
 
 module.exports = {
     entry: {
-        main: './src/index.js',
-        dnd: './src/dnd.js'
+        cookie: './src/cookie.js'
     },
     devServer: {
-        index: 'dnd.html'
+        index: 'cookie.html'
     },
     output: {
         filename: '[name].[hash].js',
@@ -37,15 +36,10 @@ module.exports = {
         }),
         new ExtractTextPlugin('styles.css'),
         new HtmlPlugin({
-            title: 'Main Homework',
-            template: 'main.hbs',
-            chunks: ['main']
-        }),
-        new HtmlPlugin({
-            title: 'Div Drag And Drop',
-            template: 'dnd.hbs',
-            filename: 'dnd.html',
-            chunks: ['dnd']
+            title: 'Cookies',
+            template: 'cookie.hbs',
+            filename: 'cookie.html',
+            chunks: ['cookie']
         }),
         new CleanWebpackPlugin(['dist'])
     ]
